@@ -1,5 +1,6 @@
 const Contact = require('../models/contact');
-var nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer');
+const { getMaxListeners } = require('../models/contact');
 
 exports.postMessage = (req, res) => {
     const message = new Contact({
@@ -29,19 +30,19 @@ exports.getMessages = async (req, res) => {
 exports.postresponse = (req, res) => {
     const {email, response} = req.body;
 
-    var transporter = nodemailer.createTransport({
+    const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-          user: 'kaoutar1dev@gmail.com',
-          pass: '1234azerty'
+          user: process.env.EMAIL,
+          pass: process.env.PASSWORD,
         }
       });
       
-      var mailOptions = {
-        from: 'kaoutar1dev@gmail.com',
-        to: `${email}`,
+      const mailOptions = {
+        from: process.env.EMAIL,
+        to: process.env.EMAIL,
         subject: 'Sending Email ',
-        text: `${response}`
+        html: '<h1>hello from server kaoutar</h1>',
       };
       
       transporter.sendMail(mailOptions, function(error, info){

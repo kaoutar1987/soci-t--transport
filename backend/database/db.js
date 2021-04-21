@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 const connectDB = async()=>{
     try{
-        await mongoose.connect("mongodb://admin:admin@localhost:port/sociteTransport?authSource=admin",
+        await mongoose.connect(process.env.DATABASE,
          {
             useNewUrlParser: true,
             useUnifiedTopology: true,
