@@ -2,15 +2,16 @@ const Contact = require('../models/contact');
 const nodemailer = require('nodemailer');
 const { getMaxListeners } = require('../models/contact');
 
-exports.postMessage = (req, res) => {
+exports.postMessage =async (req, res) => {
     const message = new Contact({
         ...req.body
     });
-
-
-    const saveMessage = message.save();
+    // console.log(object)
     try {
-        res.status(201).send({message : 'your message has ben sended'})
+       const saveMessage =await message.save();
+       if(saveMessage){
+        return res.status(201).send({message : 'your message has ben sended'})
+       }
     } catch (error) {
         res.status(400).send(error)
     }
@@ -21,14 +22,14 @@ exports.getMessages = async (req, res) => {
 
     try {
         const allMessage = await Contact.find();
-        res.status(200).json(allMessage)
+        res.status(200).json(allMessage);
     } catch (error) {
         res.status(400).send(error)
     }
 };
 
 exports.postresponse = (req, res) => {
-    const {email, response} = req.body;
+    const {Email, response} = req.body;
 
     const transporter = nodemailer.createTransport({
         service: 'gmail',

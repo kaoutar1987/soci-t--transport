@@ -14,14 +14,14 @@ const contactSchema = new mongoose.Schema({
         maxlength: 50,
         required: true
     },
-    email: {
+    Email: {
         type: String,
         trim: true,
         maxlength: 100,
         required: true,
-        unique: true
+
     },
-    phone: {
+    Phone: {
         type: String,
         maxlength: 12,
        required: [true, "Please enter your number!"]
