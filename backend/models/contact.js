@@ -1,5 +1,11 @@
 const mongoose = require('mongoose');
 
+const { Schema, model } = mongoose;
+const d = new Date();
+let month = d.getMonth() + 1;
+if (month < 10) month = `0${month}`;
+const dt = `${d.getFullYear()}-${month}-${d.getDate()}`;
+
 const contactSchema = new mongoose.Schema({
 
     Prenon: {
@@ -32,8 +38,8 @@ const contactSchema = new mongoose.Schema({
         required: true,
     },
     date: { 
-        type: Date,
-         default: Date.now },
+        type: String,
+         default: dt },
 });
 
 

@@ -3,18 +3,18 @@ import {Link} from 'react-router-dom'
 import axios from 'axios';
 
 
-
 const Home =() =>{
   const initialData = {
-    email:'',
+    Email:'',
     date:'',
   }
   const [contact,setContact]= useState([])
   const [formData,setData] = useState(initialData)
   // const [date,setDate] = useState('')
   const getContact =async ()=>{
-    const {data} = await axios.get('http://localhost:5000/api/contact');
+    const {data} = await axios.get('http://localhost:5000/api/contact/allMssage');
     if(data) setContact(data)
+    console.log(data)
   }
   useEffect(()=>{
     getContact()
@@ -37,17 +37,18 @@ const Home =() =>{
   console.log(formData.date);
   return (
     <div className="container">
-      <Link to="/add" >
+      {/* <Link to="/add" >
         add
-      </Link>
-       <form>
-        <div className="form-group ">
+      </Link> */}
+       <div className="row">
+       <form class="col-sm-5 mt-4 mb-5">
+        <div className="form-group">
           <label for="validationCustom01">Email</label>
           <input
             onChange={handelChange}
-            name="email"
-            type="email"
-            className="form-control mb-3"
+            name="Email"
+            type="Email"
+            className="form-control mb-2"
             id="validationCustom01"
             placeholder="Email"
             required
@@ -56,7 +57,7 @@ const Home =() =>{
             onChange={handelChange}
             name="date"
             type="date"
-            className="form-control mb-3"
+            className="form-control mb-2"
             id="validationCustom01"
             placeholder="Date"
             required
@@ -64,7 +65,7 @@ const Home =() =>{
          <button
           onClick={handleClick}
           type="submit"
-          className="btn btn-primary mb-3"
+          className="btn btn-primary mb 5"
         >
           Search
         </button>
@@ -80,6 +81,7 @@ const Home =() =>{
             <th scope="col">phone</th>
             <th scope="col">message</th>
             <th scope="col">date</th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -87,11 +89,11 @@ const Home =() =>{
             contact.map((element,index)=>(
               <tr>
                 <th scope="row">{index+1}</th>
-                <td>{element.nom}</td>
-                <td>{element.prenom}</td>
-                <td>{element.email}</td>
-                <td>{element.phone}</td>
-                <td>{element.message}</td>
+                <td>{element.Non}</td>
+                <td>{element.Prenon}</td>
+                <td>{element.Email}</td>
+                <td>{element.Phone}</td>
+                <td>{element.Message}</td>
                 <td>{element.date}</td>
                 <td>
                   <Link to={`/Reply/${element._id}`}>
@@ -104,9 +106,9 @@ const Home =() =>{
          }
         </tbody>
       </table>
+       </div>
     </div>
   )
 }
 
-
-export default Home;
+export default Home

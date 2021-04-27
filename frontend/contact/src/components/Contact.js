@@ -11,24 +11,26 @@ const initialState ={
 
 }
 function Contact(){
-const [contact, setContact]= useState(initialState)
-const [message, setMessage]= useState("")
-const handleChangeInput = e => {
-const {name, value} = e.target
-// console.log(name , " " , value)
-    setContact({...contact, [name]: value})
-}
+  const [contact, setContact]= useState(initialState)
+  const [message, setMessage]= useState("")
+
+  const handleChangeInput = e => {
+  const {name, value} = e.target
+  // console.log(name , " " , value)
+      setContact({...contact, [name]: value})
+  }
+
 const handelSubmit = async(e)=>{
      e.preventDefault();
-     const res = await axios.post('http://localhost:5000/api/sendmessage',contact);
+     const res = await axios.post('http://localhost:5000/api/contact/sendmessage',contact);
      if(res)  setMessage(res.data.message)
 }
 // console.log(message)         
   return ( 
    <>
  
-    <form className="form" onSubmit={handelSubmit}>
-      <h1>Contact Us 🤳 🌏 🚀 </h1>
+    <form className="form mx-auto col-sm-5" onSubmit={handelSubmit}>
+      <h1>Contact Us  🚀 </h1>
 
       {
        message && <p>{message}</p>
